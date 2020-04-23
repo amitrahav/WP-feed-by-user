@@ -122,7 +122,7 @@ class Twittesbyusers_Admin {
                     'key' => 'twitter_api_key',
                     'label' => 'Twitter Api Key',
                     'name' => 'twitter_api_key',
-                    'type' => 'text',
+                    'type' => 'password',
                     'instructions' => '',
                     'required' => 0,
                     'conditional_logic' => 0,
@@ -141,7 +141,7 @@ class Twittesbyusers_Admin {
                     'key' => 'twitter_api_key_secret',
                     'label' => 'Twitter Api Secret',
                     'name' => 'twitter_api_key_secret',
-                    'type' => 'text',
+                    'type' => 'password',
                     'instructions' => '',
                     'required' => 0,
                     'conditional_logic' => 0,
@@ -160,7 +160,7 @@ class Twittesbyusers_Admin {
                     'key' => 'field_5e9c78c5e1db4',
                     'label' => 'YouTube Api Key',
                     'name' => 'youtube_api_key',
-                    'type' => 'text',
+                    'type' => 'password',
                     'instructions' => 'Get a key @ https://console.developers.google.com/apis/api/youtube.googleapis.com',
                     'required' => 0,
                     'conditional_logic' => 0,
@@ -330,7 +330,7 @@ class Twittesbyusers_Admin {
 
         $twitter_wrapper = new Twittesbyusers_Twittes();        
         $html = $twitter_wrapper->initialize_shortcode($args);
-        error_log($html);
+
         echo $html;
     }
 

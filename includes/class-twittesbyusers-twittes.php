@@ -212,7 +212,7 @@ class Twittesbyusers_Twittes {
     }
 
     /**
-     * Handle html with pagers
+     * Open html wrapper tag
      *  
      * Long Description.
      *
@@ -225,6 +225,14 @@ class Twittesbyusers_Twittes {
         return $start;
     }
 
+
+    /**
+     * Loop each twit print content
+     *  
+     * Long Description.
+     *
+     * @since    1.0.0
+     */
     public function print_content($twittes, $user_id){
         $html = '';
         $readmore = _("קראו עוד", "feedByUsers");
