@@ -10,10 +10,10 @@
  *
  * @link              https://github.com/amitrahav
  * @since             1.0.0
- * @package           tweetsbyusers
+ * @package           feed_by_user
  *
  * @wordpress-plugin
- * Plugin Name:       tweetsByUsers
+ * Plugin Name:       feed_by_user
  * Plugin URI:        thetwo.co
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
  * Version:           1.0.0
@@ -21,7 +21,7 @@
  * Author URI:        https://github.com/amitrahav
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       tweetsbyusers
+ * Text Domain:       feed_by_user
  * Domain Path:       /languages
  */
 
@@ -35,34 +35,34 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'tweetsBYUSERS_VERSION', '1.0.0' );
+define( 'Feed_By_User_VERSION', '1.0.0' );
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-tweetsbyusers-activator.php
+ * This action is documented in includes/class-feed-by-user-activator.php
  */
-function activate_tweetsbyusers() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-tweetsbyusers-activator.php';
-	tweetsbyusers_Activator::activate();
+function activate_feed_by_user() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-feed-by-user-activator.php';
+	Feed_By_User_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-tweetsbyusers-deactivator.php
+ * This action is documented in includes/class-feed-by-user-deactivator.php
  */
-function deactivate_tweetsbyusers() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-tweetsbyusers-deactivator.php';
-	tweetsbyusers_Deactivator::deactivate();
+function deactivate_feed_by_user() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-feed-by-user-deactivator.php';
+	Feed_By_User_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_tweetsbyusers' );
-register_deactivation_hook( __FILE__, 'deactivate_tweetsbyusers' );
+register_activation_hook( __FILE__, 'activate_feed_by_user' );
+register_deactivation_hook( __FILE__, 'deactivate_feed_by_user' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-tweetsbyusers.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-feed-by-user.php';
 
 /**
  * Begins execution of the plugin.
@@ -73,10 +73,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-tweetsbyusers.php';
  *
  * @since    1.0.0
  */
-function run_tweetsbyusers() {
+function run_feed_by_user() {
 
-	$plugin = new tweetsbyusers();
+	$plugin = new feed_by_user();
 	$plugin->run();
 
 }
-run_tweetsbyusers();
+run_feed_by_user();

@@ -6,8 +6,8 @@
  * @link       https://github.com/amitrahav
  * @since      1.0.0
  *
- * @package    tweetsbyusers
- * @subpackage tweetsbyusers/includes
+ * @package    feed_by_user
+ * @subpackage feed_by_user/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  * This class defines all code necessary to run during the plugin's activation.
  *
  * @since      1.0.0
- * @package    tweetsbyusers
- * @subpackage tweetsbyusers/includes
+ * @package    feed_by_user
+ * @subpackage feed_by_user/includes
  * @author     Amit Rahav <amit.r.89@gmail.com>
  */
-class tweetsbyusers_Activator {
+class Feed_By_User_Activator {
 
 	/**
 	 * Short Description. (use period)

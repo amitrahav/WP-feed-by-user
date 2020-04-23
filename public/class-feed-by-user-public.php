@@ -6,8 +6,8 @@
  * @link       https://github.com/amitrahav
  * @since      1.0.0
  *
- * @package    tweetsbyusers
- * @subpackage tweetsbyusers/public
+ * @package    feed_by_user
+ * @subpackage feed_by_user/public
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
- * @package    tweetsbyusers
- * @subpackage tweetsbyusers/public
+ * @package    feed_by_user
+ * @subpackage feed_by_user/public
  * @author     Amit Rahav <amit.r.89@gmail.com>
  */
-class tweetsbyusers_Public {
+class Feed_By_User_Public {
 
 	/**
 	 * The ID of this plugin.
@@ -65,15 +65,15 @@ class tweetsbyusers_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in tweetsbyusers_Loader as all of the hooks are defined
+		 * defined in Feed_By_User_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The tweetsbyusers_Loader will then create the relationship
+		 * The Feed_By_User_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/tweetsbyusers-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/feed_by_user-public.css', array(), $this->version, 'all' );
 
 	}
 
@@ -88,15 +88,15 @@ class tweetsbyusers_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in tweetsbyusers_Loader as all of the hooks are defined
+		 * defined in Feed_By_User_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The tweetsbyusers_Loader will then create the relationship
+		 * The Feed_By_User_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/tweetsbyusers-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/feed_by_user-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 

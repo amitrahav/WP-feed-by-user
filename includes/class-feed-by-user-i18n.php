@@ -9,8 +9,8 @@
  * @link       https://github.com/amitrahav
  * @since      1.0.0
  *
- * @package    tweetsbyusers
- * @subpackage tweetsbyusers/includes
+ * @package    feed_by_user
+ * @subpackage feed_by_user/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    tweetsbyusers
- * @subpackage tweetsbyusers/includes
+ * @package    feed_by_user
+ * @subpackage feed_by_user/includes
  * @author     Amit Rahav <amit.r.89@gmail.com>
  */
-class tweetsbyusers_i18n {
+class Feed_By_User_i18n {
 
 
 	/**
@@ -35,7 +35,7 @@ class tweetsbyusers_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'tweetsbyusers',
+			'feed_by_user',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

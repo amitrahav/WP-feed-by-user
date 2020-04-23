@@ -7,11 +7,11 @@
  * This class defines all code necessary to get some tweets.
  *
  * @since      1.0.0
- * @package    tweetsbyusers
- * @subpackage tweetsbyusers/includes
+ * @package    feed_by_user
+ * @subpackage feed_by_user/includes
  * @author     Amit Rahav <amit.r.89@gmail.com>
  */
-class tweetsbyusers_Tube {
+class Feed_By_User_Tube {
 
      /**
      * The Twitter Endpoint

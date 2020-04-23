@@ -9,8 +9,8 @@
  * @link       https://github.com/amitrahav
  * @since      1.0.0
  *
- * @package    tweetsbyusers
- * @subpackage tweetsbyusers/includes
+ * @package    feed_by_user
+ * @subpackage feed_by_user/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    tweetsbyusers
- * @subpackage tweetsbyusers/includes
+ * @package    feed_by_user
+ * @subpackage feed_by_user/includes
  * @author     Amit Rahav <amit.r.89@gmail.com>
  */
-class tweetsbyusers
+class feed_by_user
 {
 
     /**
@@ -36,7 +36,7 @@ class tweetsbyusers
      *
      * @since    1.0.0
      * @access   protected
-     * @var      tweetsbyusers_Loader    $loader    Maintains and registers all hooks for the plugin.
+     * @var      Feed_By_User_Loader    $loader    Maintains and registers all hooks for the plugin.
      */
     protected $loader;
 
@@ -69,12 +69,12 @@ class tweetsbyusers
      */
     public function __construct()
     {
-        if (defined('tweetsBYUSERS_VERSION')) {
-            $this->version = tweetsBYUSERS_VERSION;
+        if (defined('Feed_By_User_VERSION')) {
+            $this->version = Feed_By_User_VERSION;
         } else {
             $this->version = '1.0.0';
         }
-        $this->plugin_name = 'tweetsbyusers';
+        $this->plugin_name = 'feed_by_user';
 
         $this->load_dependencies();
         $this->set_locale();
@@ -87,10 +87,10 @@ class tweetsbyusers
      *
      * Include the following files that make up the plugin:
      *
-     * - tweetsbyusers_Loader. Orchestrates the hooks of the plugin.
-     * - tweetsbyusers_i18n. Defines internationalization functionality.
-     * - tweetsbyusers_Admin. Defines all hooks for the admin area.
-     * - tweetsbyusers_Public. Defines all hooks for the public side of the site.
+     * - Feed_By_User_Loader. Orchestrates the hooks of the plugin.
+     * - Feed_By_User_i18n. Defines internationalization functionality.
+     * - Feed_By_User_Admin. Defines all hooks for the admin area.
+     * - Feed_By_User_Public. Defines all hooks for the public side of the site.
      *
      * Create an instance of the loader which will be used to register the hooks
      * with WordPress.
@@ -105,44 +105,44 @@ class tweetsbyusers
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-tweetsbyusers-loader.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-feed-by-user-loader.php';
 
         /**
          * The class responsible for defining internationalization functionality
          * of the plugin.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-tweetsbyusers-i18n.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-feed-by-user-i18n.php';
 
         /**
          * The class responsible for defining all actions that occur in the admin area.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-tweetsbyusers-admin.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-feed-by-user-admin.php';
 
         /**
          * The class responsible for defining all actions that occur in the public-facing
          * side of the site.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-tweetsbyusers-public.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-feed-by-user-public.php';
 
         /**
          * The class responsible for defining all actions that occur in the public-facing
          * side of the site.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-tweetsbyusers-tweets.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-feed-by-user-tweets.php';
 
         /**
          * The class responsible for defining all actions that occur in the public-facing
          * side of the site.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-tweetsbyusers-tube.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-feed-by-user-tube.php';
 
-        $this->loader = new tweetsbyusers_Loader();
+        $this->loader = new Feed_By_User_Loader();
     }
 
     /**
      * Define the locale for this plugin for internationalization.
      *
-     * Uses the tweetsbyusers_i18n class in order to set the domain and to register the hook
+     * Uses the Feed_By_User_i18n class in order to set the domain and to register the hook
      * with WordPress.
      *
      * @since    1.0.0
@@ -150,7 +150,7 @@ class tweetsbyusers
      */
     private function set_locale()
     {
-        $plugin_i18n = new tweetsbyusers_i18n();
+        $plugin_i18n = new Feed_By_User_i18n();
 
         $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
     }
@@ -164,7 +164,7 @@ class tweetsbyusers
      */
     private function define_admin_hooks()
     {
-        $plugin_admin = new tweetsbyusers_Admin($this->get_plugin_name(), $this->get_version());
+        $plugin_admin = new Feed_By_User_Admin($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
@@ -183,7 +183,7 @@ class tweetsbyusers
      */
     private function define_public_hooks()
     {
-        $plugin_public = new tweetsbyusers_Public($this->get_plugin_name(), $this->get_version());
+        $plugin_public = new Feed_By_User_Public($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
@@ -215,7 +215,7 @@ class tweetsbyusers
      * The reference to the class that orchestrates the hooks with the plugin.
      *
      * @since     1.0.0
-     * @return    tweetsbyusers_Loader    Orchestrates the hooks of the plugin.
+     * @return    Feed_By_User_Loader    Orchestrates the hooks of the plugin.
      */
     public function get_loader()
     {

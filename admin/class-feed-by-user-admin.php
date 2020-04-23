@@ -6,8 +6,8 @@
  * @link       https://github.com/amitrahav
  * @since      1.0.0
  *
- * @package    tweetsbyusers
- * @subpackage tweetsbyusers/admin
+ * @package    feed_by_user
+ * @subpackage feed_by_user/admin
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    tweetsbyusers
- * @subpackage tweetsbyusers/admin
+ * @package    feed_by_user
+ * @subpackage feed_by_user/admin
  * @author     Amit Rahav <amit.r.89@gmail.com>
  */
-class tweetsbyusers_Admin {
+class Feed_By_User_Admin {
 
 	/**
 	 * The ID of this plugin.
@@ -65,15 +65,15 @@ class tweetsbyusers_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in tweetsbyusers_Loader as all of the hooks are defined
+		 * defined in Feed_By_User_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The tweetsbyusers_Loader will then create the relationship
+		 * The Feed_By_User_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/tweetsbyusers-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/feed_by_user-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -88,15 +88,15 @@ class tweetsbyusers_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in tweetsbyusers_Loader as all of the hooks are defined
+		 * defined in Feed_By_User_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The tweetsbyusers_Loader will then create the relationship
+		 * The Feed_By_User_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/tweetsbyusers-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/feed_by_user-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -328,7 +328,7 @@ class tweetsbyusers_Admin {
             'last_id'  => 0
         ), $atts );
 
-        $twitter_wrapper = new tweetsbyusers_tweets();        
+        $twitter_wrapper = new Feed_By_User_tweets();        
         $html = $twitter_wrapper->initialize_shortcode($args);
 
         echo $html;
@@ -336,21 +336,34 @@ class tweetsbyusers_Admin {
 
 
     public function shortcode_tube_videos_as_json($atts) {
-
+        
         $args = shortcode_atts( array(
             'channel_id' => 'UCwf8d-hDrt3OXBoSMQuc4kQ',
             'num_of_videos' => 15
         ), $atts );
 
-        $tube_wrapper = new tweetsbyusers_Tube();
+        $tube_wrapper = new Feed_By_User_Tube();
         $videos = $tube_wrapper->get_videos($args['channel_id'], $args['num_of_videos'])->items;
-        echo "<div class='tube-wrapper' data-channel_title='". $videos[0]->snippets->channelTitle."'>'";
+        $title = isset($videos[0]->snippets)? $videos[0]->snippets->channelTitle: '';
+
+        $html = '';
+
+        $html .= "<div class='tube-wrapper' data-channel_title='$title'>";
         foreach ($videos as $key => $video) {
-            echo "<div class='twit' data-id='". $video->id->videoId ."' data-title='" . $video->snippet->title. "' data-desc ='". $video->snippet->description ."'>'";
-                echo "<img src='" . $video->snippet->thumbnails->high->url . "'/>";
-            echo "</div>'";
+            $thumbnail = $video->snippet->thumbnails->high->url;
+            $html .= '<div class="item open-video wow fadeInUp" data-id="'.$video->id->videoId.'">';
+                $html .= '<div class="image-wrapper">';
+                    $html .= '<div class="image bg" style="background: url('. $thumbnail.')"></div>';
+                    $html .= '<i class="fas fa-play" aria-hidden="true"></i>';
+                $html .= '</div>';
+                $html .= '<div class="text">';
+                    $html .= '<h3>'. $video->snippet->title.'</h3>';
+                $html .= '</div>';
+            $html .= '</div>';
         }
-        echo "</div>'";
+        $html .= "</div>";
+
+        echo $html;
     }
 
 

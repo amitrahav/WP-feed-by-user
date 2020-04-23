@@ -7,11 +7,11 @@
  * This class defines all code necessary to get some tweets.
  *
  * @since      1.0.0
- * @package    tweetsbyusers
- * @subpackage tweetsbyusers/includes
+ * @package    feed_by_user
+ * @subpackage feed_by_user/includes
  * @author     Amit Rahav <amit.r.89@gmail.com>
  */
-class tweetsbyusers_tweets {
+class Feed_By_User_tweets {
 
      /**
      * The Twitter Endpoint
@@ -97,7 +97,7 @@ class tweetsbyusers_tweets {
         );
 
         if($pager){
-            $data['max_id'] = $pager;
+            $data['max_id'] = $pager - 1;
         }
 
         $res = $this->curl_helper('GET', $this->endpoint, $data);
@@ -218,7 +218,7 @@ class tweetsbyusers_tweets {
      *
      * @since    1.0.0
      */
-    public function print_wrapper_start($first_twit){
+    public function print_wrapper_start($first_tweet ){
         $image = isset($first_twit->user->profile_image_url)? $first_twit->user->profile_image_url: '';
         
         $start = "<div class='twitter-wrapper' data-profile='$image'>";
@@ -227,7 +227,7 @@ class tweetsbyusers_tweets {
 
 
     /**
-     * Loop each twit print content
+     * Loop each tweet print content
      *  
      * Long Description.
      *
@@ -236,16 +236,16 @@ class tweetsbyusers_tweets {
     public function print_content($tweets, $user_id){
         $html = '';
         $readmore = _("קראו עוד", "feedByUsers");
-        foreach ($tweets as $key => $twit) {
+        foreach ($tweets as $key => $tweet ) {
             // Show only my twites
-            $self = !$twit->is_quote_status;
+            $self = !$tweet->is_quote_status;
             if($self){
-                $url = isset($twit->entities->urls)?$twit->entities->urls: '';
+                $url = isset($tweet->entities->urls)?$tweet->entities->urls: '';
                 if($url != '' && count($url) > 0 && isset($url[0]->url)){
                     $url = $url[0]->url;
-                    $html .= "<p class='item'> $twit->text <a href='$url'>$readmore</a></p>";
+                    $html .= "<p class='item'> $tweet->text <a href='$url'>$readmore</a></p>";
                 }else{
-                    $html .= "<p class='item'> $twit->text </p>";
+                    $html .= "<p class='item'> $tweet->text </p>";
                 }
                 $this->counter++;
             }
