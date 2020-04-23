@@ -6,8 +6,8 @@
  * @link       https://github.com/amitrahav
  * @since      1.0.0
  *
- * @package    Twittesbyusers
- * @subpackage Twittesbyusers/includes
+ * @package    tweetsbyusers
+ * @subpackage tweetsbyusers/includes
  */
 
 /**
@@ -17,11 +17,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Twittesbyusers
- * @subpackage Twittesbyusers/includes
+ * @package    tweetsbyusers
+ * @subpackage tweetsbyusers/includes
  * @author     Amit Rahav <amit.r.89@gmail.com>
  */
-class Twittesbyusers_Loader {
+class tweetsbyusers_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

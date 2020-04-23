@@ -22,7 +22,7 @@
  * @link       https://github.com/amitrahav
  * @since      1.0.0
  *
- * @package    Twittesbyusers
+ * @package    tweetsbyusers
  */
 
 // If uninstall not called from WordPress, then exit.

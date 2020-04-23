@@ -9,8 +9,8 @@
  * @link       https://github.com/amitrahav
  * @since      1.0.0
  *
- * @package    Twittesbyusers
- * @subpackage Twittesbyusers/includes
+ * @package    tweetsbyusers
+ * @subpackage tweetsbyusers/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Twittesbyusers
- * @subpackage Twittesbyusers/includes
+ * @package    tweetsbyusers
+ * @subpackage tweetsbyusers/includes
  * @author     Amit Rahav <amit.r.89@gmail.com>
  */
-class Twittesbyusers_i18n {
+class tweetsbyusers_i18n {
 
 
 	/**
@@ -35,7 +35,7 @@ class Twittesbyusers_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'twittesbyusers',
+			'tweetsbyusers',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

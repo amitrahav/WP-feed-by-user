@@ -8,8 +8,8 @@
  * @link       https://github.com/amitrahav
  * @since      1.0.0
  *
- * @package    Twittesbyusers
- * @subpackage Twittesbyusers/admin/partials
+ * @package    tweetsbyusers
+ * @subpackage tweetsbyusers/admin/partials
  */
 ?>
 

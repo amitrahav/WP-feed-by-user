@@ -4,14 +4,14 @@
 /**
  * Fired during plugin activation.
  *
- * This class defines all code necessary to get some twittes.
+ * This class defines all code necessary to get some tweets.
  *
  * @since      1.0.0
- * @package    Twittesbyusers
- * @subpackage Twittesbyusers/includes
+ * @package    tweetsbyusers
+ * @subpackage tweetsbyusers/includes
  * @author     Amit Rahav <amit.r.89@gmail.com>
  */
-class Twittesbyusers_Twittes {
+class tweetsbyusers_tweets {
 
      /**
      * The Twitter Endpoint
@@ -55,8 +55,9 @@ class Twittesbyusers_Twittes {
 
         $this->counter = 0;
         
-
-        $this->authenticate_twitter();
+        if(!$this->token){
+            $this->authenticate_twitter();
+        }
 
     }
 
@@ -81,27 +82,26 @@ class Twittesbyusers_Twittes {
 	}
 
     /**
-	 * Get twittes json
+	 * Get tweets json
 	 *  
 	 * Long Description.
 	 *
 	 * @since    1.0.0
 	 */
-    public function get_twittes($user_id, $num_of_posts, $pager = false){
+    public function get_tweets($user_id, $num_of_posts, $pager = false){
         $data = array(
             "user_id"    => $user_id,
             "count"      => $num_of_posts,
-            "exclude_replies" => true,
-            "include_rts"       => true,
-            "trim_user"         => true,
+            "exclude_replies" => 1,
+            "include_rts"       => 1,
         );
 
         if($pager){
             $data['max_id'] = $pager;
         }
 
-        return $this->curl_helper('GET', $this->endpoint, $data);
-        
+        $res = $this->curl_helper('GET', $this->endpoint, $data);
+        return $res;
     }
 
     /**
@@ -166,8 +166,8 @@ class Twittesbyusers_Twittes {
      */
     public function initialize_shortcode($args){
         
-        $twittes = $this->get_twittes($args['user_id'] , $args['num_of_posts'], $args['last_id']);
-        $html = $this->html_handle($twittes, $args);
+        $tweets = $this->get_tweets($args['user_id'] , $args['num_of_posts'], isset($args['last_id'])? $args['last_id']: false);
+        $html = $this->html_handle($tweets, $args);
         
         return $html;
 
@@ -180,21 +180,21 @@ class Twittesbyusers_Twittes {
      *
      * @since    1.0.0
      */
-    public function html_handle($twittes, $args){
+    public function html_handle($tweets, $args){
         $html = '';
         
         if(!$this->counter && !$args['last_id']){
-            $html = $this->print_wrapper_start($twittes[0]);
+            $html = $this->print_wrapper_start($tweets[0]);
         }
 
-        if(isset($twittes->errors)){
+        if(isset($tweets->errors)){
 
-            error_log(print_r($twittes->errors,true));
+            error_log(print_r($tweets->errors,true));
             $html .=  _("Plugin error", "feedByUser");
 
         }else{
 
-            $content = $this->print_content($twittes, $args['user_id']);
+            $content = $this->print_content($tweets, $args['user_id']);
             $html .= $content['html'];
 
             // pager
@@ -233,10 +233,10 @@ class Twittesbyusers_Twittes {
      *
      * @since    1.0.0
      */
-    public function print_content($twittes, $user_id){
+    public function print_content($tweets, $user_id){
         $html = '';
         $readmore = _("קראו עוד", "feedByUsers");
-        foreach ($twittes as $key => $twit) {
+        foreach ($tweets as $key => $twit) {
             // Show only my twites
             $self = !$twit->is_quote_status;
             if($self){
@@ -253,7 +253,7 @@ class Twittesbyusers_Twittes {
 
         $values = array(
             'html' => $html, 
-            'last_id'   => count($twittes) && isset($twittes[count($twittes) - 1])? $twittes[count($twittes) - 1]->id_str : false
+            'last_id'   => count($tweets) && isset($tweets[count($tweets) - 1])? $tweets[count($tweets) - 1]->id_str : false
         );
         return $values;
     }

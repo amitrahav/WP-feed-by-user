@@ -9,8 +9,8 @@
  * @link       https://github.com/amitrahav
  * @since      1.0.0
  *
- * @package    Twittesbyusers
- * @subpackage Twittesbyusers/includes
+ * @package    tweetsbyusers
+ * @subpackage tweetsbyusers/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Twittesbyusers
- * @subpackage Twittesbyusers/includes
+ * @package    tweetsbyusers
+ * @subpackage tweetsbyusers/includes
  * @author     Amit Rahav <amit.r.89@gmail.com>
  */
-class Twittesbyusers
+class tweetsbyusers
 {
 
     /**
@@ -36,7 +36,7 @@ class Twittesbyusers
      *
      * @since    1.0.0
      * @access   protected
-     * @var      Twittesbyusers_Loader    $loader    Maintains and registers all hooks for the plugin.
+     * @var      tweetsbyusers_Loader    $loader    Maintains and registers all hooks for the plugin.
      */
     protected $loader;
 
@@ -69,12 +69,12 @@ class Twittesbyusers
      */
     public function __construct()
     {
-        if (defined('TWITTESBYUSERS_VERSION')) {
-            $this->version = TWITTESBYUSERS_VERSION;
+        if (defined('tweetsBYUSERS_VERSION')) {
+            $this->version = tweetsBYUSERS_VERSION;
         } else {
             $this->version = '1.0.0';
         }
-        $this->plugin_name = 'twittesbyusers';
+        $this->plugin_name = 'tweetsbyusers';
 
         $this->load_dependencies();
         $this->set_locale();
@@ -87,10 +87,10 @@ class Twittesbyusers
      *
      * Include the following files that make up the plugin:
      *
-     * - Twittesbyusers_Loader. Orchestrates the hooks of the plugin.
-     * - Twittesbyusers_i18n. Defines internationalization functionality.
-     * - Twittesbyusers_Admin. Defines all hooks for the admin area.
-     * - Twittesbyusers_Public. Defines all hooks for the public side of the site.
+     * - tweetsbyusers_Loader. Orchestrates the hooks of the plugin.
+     * - tweetsbyusers_i18n. Defines internationalization functionality.
+     * - tweetsbyusers_Admin. Defines all hooks for the admin area.
+     * - tweetsbyusers_Public. Defines all hooks for the public side of the site.
      *
      * Create an instance of the loader which will be used to register the hooks
      * with WordPress.
@@ -105,44 +105,44 @@ class Twittesbyusers
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-twittesbyusers-loader.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-tweetsbyusers-loader.php';
 
         /**
          * The class responsible for defining internationalization functionality
          * of the plugin.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-twittesbyusers-i18n.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-tweetsbyusers-i18n.php';
 
         /**
          * The class responsible for defining all actions that occur in the admin area.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-twittesbyusers-admin.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-tweetsbyusers-admin.php';
 
         /**
          * The class responsible for defining all actions that occur in the public-facing
          * side of the site.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-twittesbyusers-public.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-tweetsbyusers-public.php';
 
         /**
          * The class responsible for defining all actions that occur in the public-facing
          * side of the site.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-twittesbyusers-twittes.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-tweetsbyusers-tweets.php';
 
         /**
          * The class responsible for defining all actions that occur in the public-facing
          * side of the site.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-twittesbyusers-tube.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-tweetsbyusers-tube.php';
 
-        $this->loader = new Twittesbyusers_Loader();
+        $this->loader = new tweetsbyusers_Loader();
     }
 
     /**
      * Define the locale for this plugin for internationalization.
      *
-     * Uses the Twittesbyusers_i18n class in order to set the domain and to register the hook
+     * Uses the tweetsbyusers_i18n class in order to set the domain and to register the hook
      * with WordPress.
      *
      * @since    1.0.0
@@ -150,7 +150,7 @@ class Twittesbyusers
      */
     private function set_locale()
     {
-        $plugin_i18n = new Twittesbyusers_i18n();
+        $plugin_i18n = new tweetsbyusers_i18n();
 
         $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
     }
@@ -164,13 +164,13 @@ class Twittesbyusers
      */
     private function define_admin_hooks()
     {
-        $plugin_admin = new Twittesbyusers_Admin($this->get_plugin_name(), $this->get_version());
+        $plugin_admin = new tweetsbyusers_Admin($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
         $this->loader->add_action('acf/init', $plugin_admin, 'acf_option_page');
 
-        add_shortcode( 'twittesbyuser', array( $plugin_admin, 'shortcode_twitter_as_json' ) );
+        add_shortcode( 'tweetsbyuser', array( $plugin_admin, 'shortcode_twitter_as_json' ) );
         add_shortcode( 'tubebyuser', array( $plugin_admin, 'shortcode_tube_videos_as_json' ) );
     }
 
@@ -183,7 +183,7 @@ class Twittesbyusers
      */
     private function define_public_hooks()
     {
-        $plugin_public = new Twittesbyusers_Public($this->get_plugin_name(), $this->get_version());
+        $plugin_public = new tweetsbyusers_Public($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
@@ -215,7 +215,7 @@ class Twittesbyusers
      * The reference to the class that orchestrates the hooks with the plugin.
      *
      * @since     1.0.0
-     * @return    Twittesbyusers_Loader    Orchestrates the hooks of the plugin.
+     * @return    tweetsbyusers_Loader    Orchestrates the hooks of the plugin.
      */
     public function get_loader()
     {

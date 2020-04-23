@@ -6,8 +6,8 @@
  * @link       https://github.com/amitrahav
  * @since      1.0.0
  *
- * @package    Twittesbyusers
- * @subpackage Twittesbyusers/admin
+ * @package    tweetsbyusers
+ * @subpackage tweetsbyusers/admin
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Twittesbyusers
- * @subpackage Twittesbyusers/admin
+ * @package    tweetsbyusers
+ * @subpackage tweetsbyusers/admin
  * @author     Amit Rahav <amit.r.89@gmail.com>
  */
-class Twittesbyusers_Admin {
+class tweetsbyusers_Admin {
 
 	/**
 	 * The ID of this plugin.
@@ -65,15 +65,15 @@ class Twittesbyusers_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Twittesbyusers_Loader as all of the hooks are defined
+		 * defined in tweetsbyusers_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Twittesbyusers_Loader will then create the relationship
+		 * The tweetsbyusers_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/twittesbyusers-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/tweetsbyusers-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -88,15 +88,15 @@ class Twittesbyusers_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Twittesbyusers_Loader as all of the hooks are defined
+		 * defined in tweetsbyusers_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Twittesbyusers_Loader will then create the relationship
+		 * The tweetsbyusers_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/twittesbyusers-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/tweetsbyusers-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -276,8 +276,8 @@ class Twittesbyusers_Admin {
                         ),
                         array(
                             'key' => 'field_5e9854ecd0978',
-                            'label' => 'Number Of Twittes',
-                            'name' => 'number_of_twittes',
+                            'label' => 'Number Of tweets',
+                            'name' => 'number_of_tweets',
                             'type' => 'number',
                             'instructions' => '',
                             'required' => 0,
@@ -328,7 +328,7 @@ class Twittesbyusers_Admin {
             'last_id'  => 0
         ), $atts );
 
-        $twitter_wrapper = new Twittesbyusers_Twittes();        
+        $twitter_wrapper = new tweetsbyusers_tweets();        
         $html = $twitter_wrapper->initialize_shortcode($args);
 
         echo $html;
@@ -342,7 +342,7 @@ class Twittesbyusers_Admin {
             'num_of_videos' => 15
         ), $atts );
 
-        $tube_wrapper = new Twittesbyusers_Tube();
+        $tube_wrapper = new tweetsbyusers_Tube();
         $videos = $tube_wrapper->get_videos($args['channel_id'], $args['num_of_videos'])->items;
         echo "<div class='tube-wrapper' data-channel_title='". $videos[0]->snippets->channelTitle."'>'";
         foreach ($videos as $key => $video) {

@@ -4,14 +4,14 @@
 /**
  * Fired during plugin activation.
  *
- * This class defines all code necessary to get some twittes.
+ * This class defines all code necessary to get some tweets.
  *
  * @since      1.0.0
- * @package    Twittesbyusers
- * @subpackage Twittesbyusers/includes
+ * @package    tweetsbyusers
+ * @subpackage tweetsbyusers/includes
  * @author     Amit Rahav <amit.r.89@gmail.com>
  */
-class Twittesbyusers_Tube {
+class tweetsbyusers_Tube {
 
      /**
      * The Twitter Endpoint
