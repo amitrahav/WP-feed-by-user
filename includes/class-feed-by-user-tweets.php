@@ -94,6 +94,8 @@ class Feed_By_User_tweets {
             "count"      => $num_of_posts,
             "exclude_replies" => 1,
             "include_rts"       => 1,
+            "truncated"    =>  false,
+            "tweet_mode"    => "extended"
         );
 
         if($pager){
@@ -183,7 +185,7 @@ class Feed_By_User_tweets {
     public function html_handle($tweets, $args){
         $html = '';
         
-        if(!$this->counter && !$args['last_id']){
+        if(!$this->counter && !$args['last_id'] && is_array($tweets)){
             $html = $this->print_wrapper_start($tweets[0]);
         }
 
@@ -236,16 +238,19 @@ class Feed_By_User_tweets {
     public function print_content($tweets, $user_id){
         $html = '';
         $readmore = _("קראו עוד", "feedByUsers");
-        foreach ($tweets as $key => $tweet ) {
-            // Show only my twites
+        foreach ($tweets as $key => $tweet ) {  
+            // Show only my tweets
             $self = !$tweet->is_quote_status;
-            if($self){
+            $has_text = property_exists($tweet, 'full_text') || property_exists($tweet, 'text');
+
+            if($self && $has_text){
+                $text = property_exists($tweet, 'full_text')? $tweet->full_text: $tweet->text;
                 $url = isset($tweet->entities->urls)?$tweet->entities->urls: '';
                 if($url != '' && count($url) > 0 && isset($url[0]->url)){
                     $url = $url[0]->url;
-                    $html .= "<p class='item'> $tweet->text <a href='$url'>$readmore</a></p>";
+                    $html .= "<p class='item'> $text <a href='$url'>$readmore</a></p>";
                 }else{
-                    $html .= "<p class='item'> $tweet->text </p>";
+                    $html .= "<p class='item'> $text </p>";
                 }
                 $this->counter++;
             }

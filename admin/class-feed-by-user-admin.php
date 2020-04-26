@@ -73,7 +73,7 @@ class Feed_By_User_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/feed_by_user-admin.css', array(), $this->version, 'all' );
+		// wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/feed_by_user-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -96,7 +96,7 @@ class Feed_By_User_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/feed_by_user-admin.js', array( 'jquery' ), $this->version, false );
+		// wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/feed_by_user-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -325,7 +325,7 @@ class Feed_By_User_Admin {
         $args = shortcode_atts( array(
             'user_id' => 1082167187006242817,
             'num_of_posts' => 15,
-            'last_id'  => 0
+            'last_id'  => false
         ), $atts );
 
         $twitter_wrapper = new Feed_By_User_tweets();        
