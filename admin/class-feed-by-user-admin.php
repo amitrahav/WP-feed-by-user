@@ -350,6 +350,7 @@ class Feed_By_User_Admin {
 
         $html .= "<div class='tube-wrapper' data-channel_title='$title'>";
         foreach ($videos as $key => $video) {
+          if($video->id->kind == "youtube#video"){
             $thumbnail = $video->snippet->thumbnails->high->url;
             $html .= '<div class="item open-video wow fadeInUp" data-id="'.$video->id->videoId.'">';
                 $html .= '<div class="image-wrapper">';
@@ -360,6 +361,7 @@ class Feed_By_User_Admin {
                     $html .= '<h3>'. $video->snippet->title.'</h3>';
                 $html .= '</div>';
             $html .= '</div>';
+          }
         }
         $html .= "</div>";
 
